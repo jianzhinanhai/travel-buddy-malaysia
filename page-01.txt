@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#123d38" name="theme-color"/>
+<meta name="description" content="马来西亚吉隆坡 × 槟城家庭旅行规划：航班候选、酒店选择、预算联动与规则化行程重排。"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="南洋双城 · 家庭私享之旅｜吉隆坡 × 槟城"/>
+<meta property="og:description" content="可交互的家庭旅行规划页面：航班、酒店、预算与行程自动联动。"/>
+
+<title>南洋双城 · 家庭私享之旅｜吉隆坡 × 槟城｜Travel Buddy v0.4.1</title>
+<style>
+:root {
+  --ink:#152321;
+  --deep:#103b36;
+  --deep2:#0b2c29;
+  --jade:#2d6b62;
+  --sage:#dfe9e3;
+  --cream:#f7f3ec;
+  --paper:#fffdf9;
+  --gold:#b98a46;
+  --muted:#67726f;
+  --line:#d9ded9;
+  --shadow:0 18px 55px rgba(17,45,41,.12);
+  --shadow-soft:0 10px 30px rgba(17,45,41,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+img{display:block;width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+.topbar{
+  position:fixed;z-index:50;left:0;right:0;top:0;
+  background:rgba(8,32,29,.82);backdrop-filter:blur(16px);
+  color:white;border-bottom:1px solid rgba(255,255,255,.12)
+}
+.topbar .inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-weight:700;letter-spacing:.14em;font-size:14px}
+.nav{display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,.78)}
+.nav a{text-decoration:none}
+.nav a:hover{color:#fff}
+.print-btn{
+  border:1px solid rgba(255,255,255,.35);color:#fff;background:transparent;
+  border-radius:999px;padding:8px 14px;cursor:pointer;font-size:12px
+}
+.hero{
+  min-height:790px;position:relative;display:flex;align-items:flex-end;
+  background-image:linear-gradient(90deg,rgba(5,25,23,.88) 0%,rgba(5,25,23,.62) 47%,rgba(5,25,23,.22) 78%),
+                   linear-gradient(0deg,rgba(5,25,23,.86) 0%,rgba(5,25,23,0) 55%),
+                   url('https://upload.wikimedia.org/wikipedia/commons/f/f6/The_Twins_SE_Asia_2019_%2849171985716%29_%28cropped%29_2.jpg');
+  background-size:cover;background-position:center 50%;
+  color:white;padding:130px 0 78px;
+}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:7px;background:linear-gradient(90deg,var(--gold),#e0be7b,var(--jade))}
+.hero-content{position:relative;z-index:2;max-width:820px}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#e8d2a7;font-weight:700}
+.eyebrow:before{content:"";width:42px;height:1px;background:#d7b26b}
+h1{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:72px;line-height:1.08;margin:22px 0 18px;letter-spacing:.02em;font-weight:700}
+.hero-sub{font-size:22px;max-width:720px;color:rgba(255,255,255,.86);margin:0 0 28px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px}
+.pill{padding:9px 15px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(255,255,255,.08);font-size:13px}
+.hero-note{margin-top:28px;max-width:690px;padding-left:18px;border-left:2px solid #d8b674;color:rgba(255,255,255,.76);font-size:13px}
+.section{padding:92px 0}
+.section.white{background:var(--paper)}
+.section.deep{background:var(--deep2);color:white}
+.section-head{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:end;margin-bottom:44px}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:10px}
+h2{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:44px;line-height:1.18;margin:0}
+.section-intro{color:var(--muted);font-size:16px;margin:0}
+.deep .section-intro{color:rgba(255,255,255,.68)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-58px;position:relative;z-index:5}
+.stat{background:var(--paper);box-shadow:var(--shadow);padding:25px 22px;border-top:3px solid var(--gold)}
+.stat b{display:block;font-family:"Songti SC","STSong",serif;font-size:28px;color:var(--deep)}
+.stat span{font-size:12px;color:var(--muted);letter-spacing:.05em}
+.highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.highlight{padding:28px;background:white;border:1px solid var(--line);min-height:190px;box-shadow:var(--shadow-soft)}
+.highlight .num{font-family:Georgia,serif;color:var(--gold);font-size:13px;letter-spacing:.14em}
+.highlight h3{font-size:19px;margin:14px 0 8px}
+.highlight p{font-size:14px;color:var(--muted);margin:0}
+.route-card{background:white;box-shadow:var(--shadow);padding:38px 36px;border-radius:2px}
+.route{display:grid;grid-template-columns:repeat(5,1fr);align-items:center;gap:0}
+.city{text-align:center;position:relative}
+.city .dot{width:12px;height:12px;border:3px solid white;background:var(--gold);box-shadow:0 0 0 1px var(--gold);border-radius:50%;margin:0 auto 12px;position:relative;z-index:2}
+.city:not(:last-child):after{content:"";position:absolute;top:6px;left:50%;width:100%;height:1px;background:linear-gradient(90deg,var(--gold),#cbd6d0)}
+.city b{display:block;font-size:16px}
+.city small{color:var(--muted);font-size:11px}
+.flight-table,.cost-table{width:100%;border-collapse:collapse;background:white;box-shadow:var(--shadow-soft)}
+.flight-table th,.flight-table td,.cost-table th,.cost-table td{padding:16px 18px;text-align:left;border-bottom:1px solid #e8ece8;vertical-align:top}
+.flight-table th,.cost-table th{font-size:11px;letter-spacing:.12em;color:var(--muted);background:#f2f5f2;text-transform:uppercase}
+.flight-table td{font-size:14px}
+.flight-table tr:last-child td,.cost-table tr:last-child td{border-bottom:0}
+.tag{display:inline-block;padding:3px 9px;background:var(--sage);color:var(--deep);border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.warning{background:#fff8e8;border-left:3px solid var(--gold);padding:16px 18px;margin-top:18px;font-size:13px;color:#65573f}
+.timeline{display:flex;flex-direction:column;gap:24px}
+.day{
+  display:grid;grid-template-columns:160px 1fr;background:white;
+  box-shadow:var(--shadow-soft);min-height:260px
+}
+.day-side{background:var(--deep);color:white;padding:28px 22px;display:flex;flex-direction:column;justify-content:space-between}
+.day-side .date{font-size:13px;letter-spacing:.12em;color:#e4c98f}
+.day-side .dnum{font-family:Georgia,serif;font-size:46px;line-height:1}
+.day-side .city-name{font-size:15px;font-weight:700}
+.day-main{display:grid;grid-template-columns:1.3fr .9fr;gap:26px;padding:28px 30px}
+.day-main h3{font-family:"Songti SC","STSong",serif;font-size:25px;margin:0 0 10px;color:var(--deep)}
+.day-main p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.schedule{list-style:none;padding:0;margin:14px 0 0}
+.schedule li{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:8px 0;border-top:1px dashed #dde3de;font-size:13px}
+.schedule time{font-weight:700;color:var(--jade)}
+.day-photo{height:100%;min-height:210px;object-fit:cover}
+.place-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.place{background:white;box-shadow:var(--shadow-soft);overflow:hidden}
+.place img{height:220px;object-fit:cover}
+.place-copy{padding:22px 22px 24px}
+.place-city{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.place h3{font-family:"Songti SC","STSong",serif;font-size:22px;margin:7px 0 8px}
+.place p{font-size:13px;color:var(--muted);margin:0}
+.cost-overview{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cost-block{background:white;box-shadow:var(--shadow-soft)}
+.cost-title{padding:24px 24px 15px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end}
+.cost-title h3{margin:0;font-family:"Songti SC","STSong",serif;font-size:24px;color:var(--deep)}
+.cost-title span{font-size:12px;color:var(--muted)}
+.cost-table td:nth-child(2),.cost-table td:nth-ch
