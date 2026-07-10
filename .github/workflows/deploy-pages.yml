@@ -23,12 +23,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Build static release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cat payload-01.txt payload-02.txt payload-03.txt payload-04.txt payload-05.txt \
+            | base64 --decode \
+            | gzip --decompress > dist/index.html
+          test -s dist/index.html
+          grep -q "Travel Buddy v0.4.1" dist/index.html
+          touch dist/.nojekyll
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
